@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import _sortBy from 'lodash/sortBy';
 import FilmsList from './pages/FilmsPage/components/FilmsList';
+import FilmsForm from './pages/FilmsPage/components/FilmForm';
 import { items } from './data';
 import FilmContext from './contexts/FilmContext';
 
@@ -20,7 +21,8 @@ const App = () => {
 	return (
 		<div className="ui container mt-3">
 			<FilmContext.Provider value={value}>
-				<FilmsList films={films} />
+				{/* <FilmsList films={films} /> */}
+				<FilmsForm />
 			</FilmContext.Provider>
 		</div>
 	);
