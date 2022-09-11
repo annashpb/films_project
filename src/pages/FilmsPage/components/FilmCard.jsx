@@ -1,15 +1,24 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import Featured from '../../../components/Featured';
 
 const FilmCard = ({ film = {} }) => {
+	const [showDescription, setShowDescription] = useState(false);
 	return (
 		<div className="ui card">
-			<Featured item={film} />
-			<div className="image">
-				<span className="ui green label ribbon">{`$ ${film.price}`}</span>
-				<img src={film.img} alt={film.title} />
-			</div>
+			{showDescription ? (
+				<div class="content" style={{ height: '100%' }}>
+					<p>{film.description}</p>
+				</div>
+			) : (
+				<>
+					<Featured item={film} />
+					<div className="image">
+						<span className="ui green label ribbon">{`$ ${film.price}`}</span>
+						<img src={film.img} alt={film.title} />
+					</div>
+				</>
+			)}
 
 			<div className="content">
 				<span className="header">{film.title}</span>
@@ -20,7 +29,18 @@ const FilmCard = ({ film = {} }) => {
 					</span>
 				</div>
 			</div>
-			<div className="extra content">
+
+			<div
+				className="content"
+				onClick={() => setShowDescription(!showDescription)}
+			>
+				<i className={`icon eye link ${showDescription && 'slash'}`} />
+				<span>
+					{`${showDescription ? 'Hide' : 'Show'} description`}
+				</span>
+			</div>
+
+			<div className={`content ${!showDescription && 'extra'}`}>
 				<div className="ui two buttons">
 					<span className="ui green basic button">
 						<i className="ui icon edit"></i>
